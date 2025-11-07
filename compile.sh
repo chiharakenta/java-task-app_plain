@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # クリーン
-rm -rf target
+rm -rf target/*
 mkdir -p target/WEB-INF/classes
 
 # javaのコンパイル
