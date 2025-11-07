@@ -19,7 +19,9 @@ public class TaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TaskList taskList = TaskList.getInstance();
         List<Task> tasks = taskList.getTasks();
+        List<Task> doneTasks = taskList.getDoneTasks();
         request.setAttribute("tasks", tasks);
+        request.setAttribute("doneTasks", doneTasks);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
         dispatcher.forward(request, response);
     }

@@ -13,10 +13,30 @@
         <input type="text" name="taskName">
         <input type="submit" value="作成">
     </form>
-    <ul>
-        <c:forEach var="task" items="${tasks}">
-            <li>${task.name}</li>
-        </c:forEach>
-    </ul>
+    <div>
+        <h2>タスク</h2>
+        <ul>
+            <c:forEach var="task" items="${tasks}">
+                <li>
+                    ${task.id}. ${task.name} ${task.done}
+                    <form action="/TaskCheckServlet" method="post">
+                        <input type="hidden" name="id" value="${task.id}" >
+                        <input type="submit" value="完了">
+                    </form>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+    <div>
+        <h2>完了したタスク</h2>
+        <ul>
+            <c:forEach var="doneTask" items="${doneTasks}">
+                <li>
+                    ${doneTask.name} ${doneTask.done}
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
 </body>
 </html>
