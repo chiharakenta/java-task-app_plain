@@ -27,6 +27,10 @@ public class Task implements Serializable {
     }
 
     // セッター
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void check() {
         this.done = true;
     }

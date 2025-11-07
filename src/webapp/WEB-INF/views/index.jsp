@@ -18,7 +18,7 @@
         <ul>
             <c:forEach var="task" items="${tasks}">
                 <li>
-                    ${task.id}. ${task.name} ${task.done}
+                    <a href="/TaskEditServlet?id=${task.id}">${task.id}. ${task.name}</a>
                     <form action="/TaskCheckServlet" method="post">
                         <input type="hidden" name="id" value="${task.id}" >
                         <input type="submit" value="完了">
@@ -33,7 +33,7 @@
         <ul>
             <c:forEach var="doneTask" items="${doneTasks}">
                 <li>
-                    ${doneTask.name} ${doneTask.done}
+                    <a href="/TaskEditServlet?id=${doneTask.id}">${doneTask.id}. ${doneTask.name}</a>
                 </li>
             </c:forEach>
         </ul>
