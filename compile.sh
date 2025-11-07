@@ -6,7 +6,7 @@ mkdir -p target/WEB-INF/classes
 
 # javaのコンパイル
 find src/java -name "*.java" > sources.txt
-javac -d target/WEB-INF/classes -cp "lib/*" @sources.txt
+javac -d target/WEB-INF/classes -cp "lib/*:src/webapp/WEB-INF/lib/*" @sources.txt
 rm sources.txt
 
 # webappフォルダ内のコピー

@@ -1,16 +1,17 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class TaskList implements Serializable {
     private static TaskList instance;
-    private static final String DATA_FILE_PATH = "db/taskList.dat";
+    private static final String DATA_FILE_PATH = "db/taskList.json";
     private int nextId = 1;
     private List<Task> tasks = new ArrayList<Task>();
 
@@ -67,10 +68,10 @@ public class TaskList implements Serializable {
     // <ファイルの読み書き>
     public void save() {
         try (
-            FileOutputStream fos = new FileOutputStream(DATA_FILE_PATH);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            FileWriter fw = new FileWriter(DATA_FILE_PATH);
         ) {
-            oos.writeObject(this);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(this, fw);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,14 +79,10 @@ public class TaskList implements Serializable {
 
     private static void load() {
         try (
-            FileInputStream fis = new FileInputStream(DATA_FILE_PATH);
-            ObjectInputStream ois = new ObjectInputStream(fis);
+            FileReader fr = new FileReader(DATA_FILE_PATH);
         ) {
-            Object obj = ois.readObject();
-            if (obj instanceof TaskList) {
-                instance = (TaskList) obj;
-                return;
-            }
+            Gson gson = new Gson();
+            instance = gson.fromJson(fr, TaskList.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
