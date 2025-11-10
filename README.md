@@ -42,11 +42,11 @@ java・tomcat・シェルスクリプトで、war準拠のタスク管理アプ�
     ```
 1. 実行時に必要なライブラリをダウンロード
     ```shell
-    cp lib/gson-2.13.2.jar target/WEB-INF/lib
-    cd target/WEB-INF/lib
+    cp lib/gson-2.13.2.jar src/webapp/WEB-INF/lib
+    cd src/webapp/WEB-INF/lib
     curl -OL https://repo1.maven.org/maven2/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.2/jakarta.servlet.jsp.jstl-api-3.0.2.jar
     curl -OL https://repo1.maven.org/maven2/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar
-    cd ../../..
+    cd ../../../..
     ```
 1. 実行
     ```shell
