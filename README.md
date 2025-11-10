@@ -22,7 +22,7 @@ java・tomcat・シェルスクリプトで、war準拠のタスク管理アプ�
 1. shファイルに実行権限を付与
     ```shell
     chmod +x init.sh
-    chmod +x compile.sh
+    chmod +x build.sh
     ```
 1. 必要なディレクトリを生成
     ```shell
@@ -45,7 +45,7 @@ java・tomcat・シェルスクリプトで、war準拠のタスク管理アプ�
     ```
 1. 実行
     ```shell
-    ./compile.sh
+    ./build.sh
     ```
 
     [http://localhost:8080](http://localhost:8080) にアクセス
