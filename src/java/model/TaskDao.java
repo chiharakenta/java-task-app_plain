@@ -27,19 +27,19 @@ public class TaskDao implements Serializable {
 
 
     // <ゲッター>
-    public List<Task> getTasks() {
+    public List<Task> findAll() {
         return this.tasks.stream()
             .filter(task -> !task.getDone())
             .toList();
     }
 
-    public List<Task> getDoneTasks() {
+    public List<Task> findDone() {
         return this.tasks.stream()
             .filter(task -> task.getDone())
             .toList();
     }
 
-    public Task findTaskById(int id) {
+    public Task findById(int id) {
         return this.tasks.stream()
             .filter(task -> task.getId() == id)
             .findFirst()
@@ -57,7 +57,7 @@ public class TaskDao implements Serializable {
     }
 
     public void updateName(int id, String taskName) {
-        Task task = findTaskById(id);
+        Task task = findById(id);
         if (task != null) {
             task.setName(taskName);
             DataStore.save(DATA_FILE_PATH, this);
@@ -65,7 +65,7 @@ public class TaskDao implements Serializable {
     }
 
     public void check(int id) {
-        Task task = findTaskById(id);
+        Task task = findById(id);
         if (task != null) {
             task.check();
             DataStore.save(DATA_FILE_PATH, this);

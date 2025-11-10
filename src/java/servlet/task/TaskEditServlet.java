@@ -16,7 +16,7 @@ public class TaskEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Task task = TaskDao.getInstance().findTaskById(id);
+        Task task = TaskDao.getInstance().findById(id);
         request.setAttribute("task", task);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/edit.jsp");
         dispatcher.forward(request, response);

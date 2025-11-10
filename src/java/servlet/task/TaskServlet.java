@@ -18,8 +18,8 @@ public class TaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TaskDao taskDao = TaskDao.getInstance();
-        List<Task> tasks = taskDao.getTasks();
-        List<Task> doneTasks = taskDao.getDoneTasks();
+        List<Task> tasks = taskDao.findAll();
+        List<Task> doneTasks = taskDao.findDone();
         request.setAttribute("tasks", tasks);
         request.setAttribute("doneTasks", doneTasks);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
