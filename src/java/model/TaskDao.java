@@ -42,10 +42,6 @@ public class TaskDao implements Serializable {
             .toList();
     }
 
-    public int getNextId() {
-        return nextId;
-    }
-
     public Task findTaskById(int id) {
         return this.tasks.stream()
             .filter(task -> task.getId() == id)
