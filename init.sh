@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mkdir -p lib db
+mkdir -p lib db target/WEB-INF/lib

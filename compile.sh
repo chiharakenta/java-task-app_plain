@@ -18,16 +18,25 @@ cp -r src/webapp/* target/
 
 
 # --------------------------
+# warファイルの作成
+cd target
+jar cf ROOT.war .
+cd ..
+# --------------------------
+
+
+
+# --------------------------
 # Tomcatにデプロイ
-APP_PATH="$CATALINA_HOME/webapps/ROOT"
-rm -rf -- $APP_PATH
-mkdir $APP_PATH
-cp -r target/* $APP_PATH
+APP_PATH="$CATALINA_HOME/webapps"
+rm -f $APP_PATH/ROOT.war
+rm -rf $APP_PATH/ROOT
+cp target/ROOT.war $APP_PATH
 # --------------------------
 
 
 # --------------------------
-# tomcatの再起動
+# Tomcatの再起動
 $CATALINA_HOME/bin/shutdown.sh
 $CATALINA_HOME/bin/startup.sh
 # --------------------------
