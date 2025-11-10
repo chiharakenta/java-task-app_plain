@@ -9,20 +9,20 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class TaskList implements Serializable {
-    private static TaskList instance;
+public class TaskDao implements Serializable {
+    private static TaskDao instance;
     private static final String DATA_FILE_PATH = "db/taskList.json";
     private int nextId = 1;
     private List<Task> tasks = new ArrayList<Task>();
 
     // <初期化処理>
-    private TaskList() {};
-    public static TaskList getInstance() {
+    private TaskDao() {};
+    public static TaskDao getInstance() {
         if (instance == null) {
             load();
         }
         if (instance == null) {
-            instance = new TaskList();
+            instance = new TaskDao();
         }
         return instance;
     }
@@ -62,6 +62,14 @@ public class TaskList implements Serializable {
         this.tasks.add(newTask);
         save();
     }
+
+    public void update(int id, String taskName) {
+        Task task = findTaskById(id);
+        if (task != null) {
+            task.setName(taskName);
+            save();
+        }
+    }
     // </タスクリストの操作>
 
 
@@ -82,7 +90,7 @@ public class TaskList implements Serializable {
             FileReader fr = new FileReader(DATA_FILE_PATH);
         ) {
             Gson gson = new Gson();
-            instance = gson.fromJson(fr, TaskList.class);
+            instance = gson.fromJson(fr, TaskDao.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

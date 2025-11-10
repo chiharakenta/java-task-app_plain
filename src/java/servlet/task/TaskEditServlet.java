@@ -1,7 +1,6 @@
-package servlet;
+package servlet.task;
 
 import java.io.IOException;
-import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,27 +9,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Task;
-import model.TaskList;
+import model.TaskDao;
 
-@WebServlet("/TaskServlet")
-public class TaskServlet extends HttpServlet {
-
+@WebServlet("/TaskEditServlet")
+public class TaskEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TaskList taskList = TaskList.getInstance();
-        List<Task> tasks = taskList.getTasks();
-        List<Task> doneTasks = taskList.getDoneTasks();
-        request.setAttribute("tasks", tasks);
-        request.setAttribute("doneTasks", doneTasks);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
+        int id = Integer.parseInt(request.getParameter("id"));
+        Task task = TaskDao.getInstance().findTaskById(id);
+        request.setAttribute("task", task);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/edit.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String taskName = request.getParameter("taskName");
-        TaskList taskList = TaskList.getInstance();
-        taskList.add(taskName);
+        int taskId = Integer.parseInt(request.getParameter("id"));
+        String taskName = request.getParameter("name");
+        TaskDao.getInstance().update(taskId, taskName);
         response.sendRedirect("/TaskServlet");
     }
 }

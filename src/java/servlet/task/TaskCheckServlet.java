@@ -1,4 +1,4 @@
-package servlet;
+package servlet.task;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Task;
-import model.TaskList;
+import model.TaskDao;
 
 @WebServlet("/TaskCheckServlet")
 public class TaskCheckServlet extends HttpServlet {
@@ -16,11 +16,11 @@ public class TaskCheckServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         // 完了処理
-        TaskList taskList = TaskList.getInstance();
-        Task task = taskList.findTaskById(id);
+        TaskDao taskDao = TaskDao.getInstance();
+        Task task = taskDao.findTaskById(id);
         if (task != null) {
             task.check();
-            taskList.save();
+            taskDao.save();
         }
 
         // リダイレクト処理
