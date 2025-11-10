@@ -13,12 +13,11 @@ rm sources.txt
 cp -r src/webapp/* target
 
 # デプロイ
-TOMCAT_PATH="/Users/chiharakenta/Desktop/java-samples/apache-tomcat-11.0.10"
-APP_PATH="$TOMCAT_PATH/webapps/ROOT"
+APP_PATH="$CATALINA_HOME/webapps/ROOT"
 rm -rf -- $APP_PATH
 mkdir $APP_PATH
 cp -r target/* $APP_PATH
 
 # tomcatの再起動
-$TOMCAT_PATH/bin/shutdown.sh
-$TOMCAT_PATH/bin/startup.sh
+$CATALINA_HOME/bin/shutdown.sh
+$CATALINA_HOME/bin/startup.sh
