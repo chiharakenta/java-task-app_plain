@@ -26,7 +26,7 @@ public class TaskEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int taskId = Integer.parseInt(request.getParameter("id"));
         String taskName = request.getParameter("name");
-        TaskDao.getInstance().update(taskId, taskName);
+        TaskDao.getInstance().updateName(taskId, taskName);
         response.sendRedirect("/TaskServlet");
     }
 }

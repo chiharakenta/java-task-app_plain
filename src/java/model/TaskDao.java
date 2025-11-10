@@ -1,17 +1,14 @@
 package model;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import util.DataStore;
 
 public class TaskDao implements Serializable {
     private static TaskDao instance;
-    private static final String DATA_FILE_PATH = "db/taskList.json";
+    private static final String DATA_FILE_PATH = "db/tasks.json";
     private int nextId = 1;
     private List<Task> tasks = new ArrayList<Task>();
 
@@ -19,7 +16,7 @@ public class TaskDao implements Serializable {
     private TaskDao() {};
     public static TaskDao getInstance() {
         if (instance == null) {
-            load();
+            instance = DataStore.load(DATA_FILE_PATH, TaskDao.class);
         }
         if (instance == null) {
             instance = new TaskDao();
@@ -52,44 +49,27 @@ public class TaskDao implements Serializable {
 
 
     // <タスクリストの操作>
-    public void add(String taskName) {
+    public void create(String taskName) {
         Task newTask = new Task(nextId, taskName);
         nextId++;
         this.tasks.add(newTask);
-        save();
+        DataStore.save(DATA_FILE_PATH, this);
     }
 
-    public void update(int id, String taskName) {
+    public void updateName(int id, String taskName) {
         Task task = findTaskById(id);
         if (task != null) {
             task.setName(taskName);
-            save();
+            DataStore.save(DATA_FILE_PATH, this);
+        }
+    }
+
+    public void check(int id) {
+        Task task = findTaskById(id);
+        if (task != null) {
+            task.check();
+            DataStore.save(DATA_FILE_PATH, this);
         }
     }
     // </タスクリストの操作>
-
-
-    // <ファイルの読み書き>
-    public void save() {
-        try (
-            FileWriter fw = new FileWriter(DATA_FILE_PATH);
-        ) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(this, fw);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void load() {
-        try (
-            FileReader fr = new FileReader(DATA_FILE_PATH);
-        ) {
-            Gson gson = new Gson();
-            instance = gson.fromJson(fr, TaskDao.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    // </ファイルの読み書き>
 }

@@ -30,7 +30,7 @@ public class TaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String taskName = request.getParameter("taskName");
         TaskDao taskDao = TaskDao.getInstance();
-        taskDao.add(taskName);
+        taskDao.create(taskName);
         response.sendRedirect("/TaskServlet");
     }
 }

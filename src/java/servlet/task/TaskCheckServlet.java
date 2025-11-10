@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Task;
+
 import model.TaskDao;
 
 @WebServlet("/TaskCheckServlet")
@@ -17,11 +17,7 @@ public class TaskCheckServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         // 完了処理
         TaskDao taskDao = TaskDao.getInstance();
-        Task task = taskDao.findTaskById(id);
-        if (task != null) {
-            task.check();
-            taskDao.save();
-        }
+        taskDao.check(id);
 
         // リダイレクト処理
         response.sendRedirect("/TaskServlet");
