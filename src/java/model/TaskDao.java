@@ -64,12 +64,11 @@ public class TaskDao implements Serializable {
         }
     }
 
-    public void check(int id) {
+    public void setDone(int id, Boolean done) {
         Task task = findById(id);
         if (task != null) {
-            task.check();
+            task.setDone(done);
             DataStore.save(DATA_FILE_PATH, this);
         }
     }
-    // </タスクリストの操作>
 }

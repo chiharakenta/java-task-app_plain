@@ -15,9 +15,10 @@ public class TaskCheckServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
+        Boolean taskIsDone = Boolean.parseBoolean(request.getParameter("done"));
         // 完了処理
         TaskDao taskDao = TaskDao.getInstance();
-        taskDao.check(id);
+        taskDao.setDone(id, taskIsDone);
 
         // リダイレクト処理
         response.sendRedirect("/TaskServlet");

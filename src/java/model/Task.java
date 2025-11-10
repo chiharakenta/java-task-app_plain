@@ -31,7 +31,7 @@ public class Task implements Serializable {
         this.name = name;
     }
 
-    public void check() {
-        this.done = true;
+    public void setDone(Boolean done) {
+        this.done = done;
     }
 }

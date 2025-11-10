@@ -20,8 +20,9 @@
                 <li>
                     <a href="/TaskEditServlet?id=${task.id}">${task.id}. ${task.name}</a>
                     <form action="/TaskCheckServlet" method="post">
-                        <input type="hidden" name="id" value="${task.id}" >
-                        <input type="submit" value="完了">
+                        <input type="hidden" name="id" value="${task.id}" />
+                        <input type="hidden" name="done" value="true" />
+                        <input type="submit" value="完了" />
                     </form>
                 </li>
             </c:forEach>
@@ -34,6 +35,11 @@
             <c:forEach var="doneTask" items="${doneTasks}">
                 <li>
                     <a href="/TaskEditServlet?id=${doneTask.id}">${doneTask.id}. ${doneTask.name}</a>
+                    <form action="/TaskCheckServlet" method="post">
+                        <input type="hidden" name="id" value="${doneTask.id}" />
+                        <input type="hidden" name="done" value="false" />
+                        <input type="submit" value="戻す" />
+                    </form>
                 </li>
             </c:forEach>
         </ul>
