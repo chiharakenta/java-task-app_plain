@@ -19,6 +19,11 @@ java・tomcat・シェルスクリプトで、war準拠のタスク管理アプ�
     echo 'export CATALINA_HOME="/opt/homebrew/Cellar/tomcat/11.0.13/libexec"' >> ~/.zshrc
     source ~/.zshrc
     ```
+1. クローン
+    ```shell
+    git clone https://github.com/chiharakenta/java-task-app_plain.git
+    cd java-task-app_plain
+    ```
 1. shファイルに実行権限を付与
     ```shell
     chmod +x init.sh
