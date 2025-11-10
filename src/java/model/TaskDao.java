@@ -48,19 +48,19 @@ public class TaskDao implements Serializable {
     // </ゲッター>
 
 
-    // <タスクリストの操作>
+    // <タスクの操作>
     public void create(String taskName) {
         Task newTask = new Task(nextId, taskName);
         nextId++;
         this.tasks.add(newTask);
-        DataStore.save(DATA_FILE_PATH, this);
+        save();
     }
 
     public void updateName(int id, String taskName) {
         Task task = findById(id);
         if (task != null) {
             task.setName(taskName);
-            DataStore.save(DATA_FILE_PATH, this);
+            save();
         }
     }
 
@@ -68,7 +68,13 @@ public class TaskDao implements Serializable {
         Task task = findById(id);
         if (task != null) {
             task.setDone(done);
-            DataStore.save(DATA_FILE_PATH, this);
+            save();
         }
+    }
+    // </タスクの操作>
+
+    // 永続化処理
+    private void save() {
+        DataStore.save(DATA_FILE_PATH, this);
     }
 }
