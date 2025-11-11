@@ -26,12 +26,11 @@ java・tomcat・シェルスクリプトで、war準拠のタスク管理アプ�
     ```
 1. shファイルに実行権限を付与
     ```shell
-    chmod +x init.sh
-    chmod +x build.sh
+    chmod +x bin/*
     ```
 1. 必要なディレクトリを生成
     ```shell
-    ./init.sh
+    bin/init
     ```
 1. 開発時に必要なライブラリをlibフォルダにダウンロード
     ```
@@ -50,7 +49,7 @@ java・tomcat・シェルスクリプトで、war準拠のタスク管理アプ�
     ```
 1. 実行
     ```shell
-    ./build.sh
+    bin/build
     ```
 
     [http://localhost:8080](http://localhost:8080) にアクセス
